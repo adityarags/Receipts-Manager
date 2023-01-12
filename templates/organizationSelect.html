@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
+    <title>Donation App | Select Organization</title>
+</head>
+<body>
+  <header id ="main-header">
+      <div class = "container">
+          <h1>Select an Organization</h1>
+      </div>
+  </header>
+  <nav id = "navbar">
+      <div class="container">
+          <li><a href ="/">Home</a></li>
+      </div>
+  </nav>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email ID</th>
+            <th scope="col">Select</th>
+
+
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% for organization in allorganizations %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{organization.Name}}</td>
+            <td>{{organization.Phone_Number}}</td>
+            <td>{{organization.Email}}</td>
+            <td><a href = "/Organization/{{organization.org_id}}"><button type="button" class="btn btn-outline-success">Accept</button></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</body>
+</html>

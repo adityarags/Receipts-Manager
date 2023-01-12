@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
+    <title>Donation App | Narration Values Update</title>
+</head>
+<body>
+    <header id ="main-header">
+        <div class = "container">
+            <h1>Narration Update</h1>
+        </div>
+    </header>
+    <nav id = "navbar">
+        <div class="container">
+            <li><a href ="/Organization/{{org_id}}">Dashboard</a></li>
+            <li><a href ="/{{org_id}}/NarrationUpdate">Back</a></li>
+        </div>
+    </nav>
+    <div class = "content-block">
+        <form method="POST" >
+
+            <div class = "form-group">
+                <label for = "realization_date">Realization Date</label>
+                <input type = "text" name = "realization_date" id = "realization_date">
+            </div>
+
+            <div class = "form-group">
+                <label for = "nattation">Narration</label>
+                <textarea name="narration" id = "narration"></textarea>
+            </div>
+
+
+            <div class = "form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

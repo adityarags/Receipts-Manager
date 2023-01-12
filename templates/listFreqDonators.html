@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Donation App | Frequent Donators List </title>
+</head>
+<body>
+    <header id ="main-header">
+        <div class = "container">
+            <h1>Donators List</h1>
+        </div>
+    </header>
+    <nav id = "navbar">
+        <div class="container">
+            <li><a href ="/Organization/{{ org_id }}">Dashboard</a></li>
+            <li><a href ="/{{ org_id }}/frequentDonator">Create a Donator Entry</a></li>
+        </div>
+    </nav>
+    <div class="searchbox" style="width:25%; float:right;padding:5px">
+            <form action = "" method = "POST">
+                <div class="input-group mb-3">
+                    <input name="search" type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+    </div>
+    
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Donator ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Receipt</th>
+
+
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% for donator in all_donators %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{donator.donator_id}}</td>
+            <td>{{donator.name}}</td>
+            <td>{{donator.phoneno}}</td>
+            <td><a href = "/{{org_id}}/{{donator.did}}/generateReceipt"><button type="button" class="btn btn-outline-success">Receipt</button></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</body>
+</html>

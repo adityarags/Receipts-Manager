@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
+    <title>Donation App | Dashboard</title>
+</head>
+<body>
+
+    <header id ="main-header">
+        <div class = "container">
+            <h1>Dashboard | {{ Organization.Name }}</h1>
+        </div>
+    </header>
+    <nav id = "navbar">
+        <div class="container">
+            <li><a href ="/">Home</a></li>
+            <li><a href ="/{{ Organization.org_id }}/receipt">Create a Receipt</a></li>
+            <li><a href ="/{{ Organization.org_id }}/addPurpose">Update Purposes</a></li>
+            <li><a href ="/{{ Organization.org_id }}/donatorList">Your Donators</a></li>
+            <li><a href ="/{{ Organization.org_id }}/checkData">Transactions</a></li>
+            <li><a href ="/{{ Organization.org_id }}/listFreqDonators">Donator Masters</a></li>
+            <li><a href ="/{{ Organization.org_id }}/uploadTransactions">Upload Transactions</a></li>
+            <li><a href ="/{{ Organization.org_id }}/bookMaintainers">Book Maintainers</a></li>
+            <li><a href ="/{{ Organization.org_id }}/NarrationUpdate">Bank Narration Update</a></li>
+        </div>
+    </nav>
+    <div class = "content-block">
+        <h2>Your Profile</h2>
+        <p>Name: {{Organization.Name}}</p>
+        <p>Address: {{Organization.Address}}</p>
+        <p>Phone Number: {{Organization.Phone_Number}}</p>
+        <p>Email ID: {{Organization.Email}}</p>
+        <p>PAN ID: {{Organization.PAN}}</p>
+        <p>Purposes: {{Organization.Purposes}}</p>
+        <p>Trust Number: {{Organization.t_no}}</p>
+        <p>Society Number: {{Organization.s_no}}</p>
+        <p>80G Registration Number: {{Organization.atgr_no}}</p>
+        <p>12AA Number: {{Organization.aa12_no}}</p>
+        <p>Website: {{Organization.website}}</p>
+    </div>
+
+
+
+</body>
+</html>

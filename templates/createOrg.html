@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
+    <title>Donation App | Create Organization</title>
+</head>
+<body>
+    <header id ="main-header">
+        <div class = "container">
+            <h1>Create Organization</h1>
+        </div>
+    </header>
+    <nav id = "navbar">
+        <div class="container">
+            <li><a href ="/">Home</a></li>
+        </div>
+    </nav>
+    <div class = "content-block">
+        <form method="POST" >
+            <div class = "form-group">
+                <label for = "name">Name</label>
+                <input type = "text" id = "name" name="name" required>
+            </div>
+
+            <div class = "form-group">
+                <label for = "orgcode">Organization Code</label>
+                <input type = "text" name = "orgcode" id = "orgcode">
+            </div>
+
+
+            <div class = "form-group">
+                <label for = "address">Address</label>
+                <textarea name="address" id = "address"></textarea>
+            </div>
+
+            <div class = "form-group">
+                <label for = "phone">Phone Number</label>
+                <input type = "number" name = "phone" id = "phone">
+            </div>
+
+            
+            <div class = "form-group">
+                <label for="email">Email ID</label>
+                <input type="email" name = "email" id = "email">
+            </div>
+
+            <div class = "form-group">
+                <label for="pan">PAN ID</label>
+                <input type="text" name = "pan" id = "pan">
+            </div>
+
+            <div class = "form-group">
+                <label for="trustno">Trust Number</label>
+                <input type="text" name = "trustno" id = "trustno">
+            </div>
+
+            <div class = "form-group">
+                <label for="societyno">Society Number</label>
+                <input type="text" name = "societyno" id = "societyno">
+            </div>
+
+
+            <div class = "form-group">
+                <label for="atgregno">80G Registration Number</label>
+                <input type="text" name = "atgregno" id = "atgregno">
+            </div>
+
+            <div class = "form-group">
+                <label for="12aano">12AA Number</label>
+                <input type="text" name = "12aano" id = "12aano">
+            </div>
+
+            <div class = "form-group">
+                <label for = "phone">Website</label>
+                <input type = "text" name = "website" id = "website">
+            </div>
+
+
+            <div class = "form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

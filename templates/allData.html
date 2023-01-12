@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
+    <title>Donation App | Transactions</title>
+</head>
+<body>
+    <header id ="main-header">
+        <div class = "container">
+            <h1>Transactions</h1>
+        </div>
+    </header>
+    <nav id = "navbar">
+        <div class="container">
+            <li><a href ="/Organization/{{ org_id }}">Dashboard</a></li>
+            <li><a href ="/download/{{ org_id }}">Download</a></li>
+        </div>
+    </nav>
+      
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Book Number</th>
+              <th scope="col">Receipt Number</th>
+              <th scope="col">Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">State</th>
+              <th scope="col">Pin Code</th>
+              <th scope="col">Landline Number</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Email ID</th>
+              <th scope="col">ID Type</th>
+              <th scope="col">ID Number</th>
+              <th scope="col">Purpose</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Mode</th>
+              <th scope="col">Realization Date (If 'Bank' payment mode)</th>
+  
+  
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            {% for receipt in receipts %}
+            <tr>
+              <th scope="row">{{ loop.index }}</th>
+              <td>{{receipt.book_no}}</td>
+              <td>{{receipt.receipt_no}}</td>
+              <td>{{receipt.name}}</td>
+              <td>{{receipt.address}}</td>
+              <td>{{receipt.state}}</td>
+              <td>{{receipt.pincode}}</td>
+              <td>{{receipt.landline}}</td>
+              <td>{{receipt.phoneno}}</td>
+              <td>{{receipt.email}}</td>
+              <td>{{receipt.id_type}}</td>
+              <td>{{receipt.panid}}</td>
+              <td>{{receipt.purpose}}</td>
+              <td>{{receipt.amount}}</td>
+              <td>{{receipt.mode}}</td>
+              <td>{{receipt.realization_date}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+</body>
+</html>
