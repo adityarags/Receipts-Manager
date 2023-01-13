@@ -213,7 +213,29 @@ def listFreqDonators(org_id):
 
     return render_template("listFreqDonators.html", org_id = org_id, all_donators = all_donators)
 
+@app.route("/<int:org_id>/downloadFrequentDonator/")
+def downloadFrequentDonator(org_id):
+    return send_file("app_data/Sample Donator Master File.xlsx")
 
+@app.route("/<int:org_id>/uploadFrequentDonator/", methods = ["GET", "POST"])
+def uploadFrequentDonator(org_id):
+    if request.method == "POST":
+        f = request.files["file"]
+        df = pd.read_excel(f, names = ["name", "address", "state", "pincode", "landline", "phoneno", "email","id_type", "panid"])
+        curr_orgcode = Organization.query.filter_by(org_id = org_id)[0].orgcode
+        offset = Donator.query.all()[-1].did
+        df["org_id"] = np.array([org_id] * df.shape[0])
+        df = df.fillna("")
+        # id_offsets = np.array(map(str, range(Donator.query.all()[-1].did + 1, Donator.query.all()[-1].did + 1 + df.shape[0])))
+        
+        df = df.drop_duplicates(subset=['panid'])
+        df["donator_id"] = np.char.add(np.array([curr_orgcode] * df.shape[0]).astype(str), np.array(list(range(offset + 1, offset + 1 + df.shape[0]))).astype(str))
+        df.to_sql(name='donator', con=db.engine, index=False, if_exists = "append")
+        print(df.head(10))
+        
+        
+    return render_template("uploadDonator.html", org_id = org_id)
+    
 
 @app.route('/<int:org_id>/<int:did>/generateReceipt', methods = ["GET", "POST"])
 def generateDonatorReceipt(org_id, did):
@@ -282,7 +304,7 @@ def uploadCheck(org_id):
         return redirect(url_for("orgDashboard", org_id = org_id))
     avail_pans = [_[0] for _ in db.session.query(Donator.panid).distinct(Donator.panid).filter_by(org_id = org_id).all()]
     uniquePans = DF[~DF.panid.isin(avail_pans)]
-    uniquePans = uniquePans[uniquePans.panid != ""]
+    # uniquePans = uniquePans[uniquePans.panid != ""]
     uniquePans = uniquePans.drop_duplicates(subset=['panid'])
     current_purposes = list(np.unique(DF["purpose"]))
     current_org = Organization.query.filter_by(org_id = org_id).all()[0]

@@ -17,13 +17,13 @@
     <nav id = "navbar">
         <div class="container">
             <li><a href ="/Organization/{{ org_id }}">Dashboard</a></li>
-            <li><a href="/downloadTemplate">Back</a></li>
+            <li><a href="/{{org_id}}/listFreqDonators">Back</a></li>
         </div>
     </nav>
 
     <div class="main" style="width: 80%; margin:auto; border: 1.5px solid black; border-radius: 5px; margin-top: 5px; padding: 5px;;">
     
-        <h1> Upload Transactions Here</h1>
+        <h1> Upload Donator Master File</h1>
         <form enctype="multipart/form-data" method = "POST">
             <div class="input-group">
                 <input name = "file" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
