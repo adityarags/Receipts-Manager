@@ -8,6 +8,7 @@ import pandas as pd
 from fileinput import filename
 
 DF = None
+CURRENT_NARRATION = None
 
 @app.route("/")
 def home():
@@ -471,3 +472,26 @@ def bookAssigned(org_id, book_no, mid):
     db.session.add(newAssign)
     db.session.commit()
     return redirect(url_for("assignBook", org_id = org_id, mid = mid))
+
+@app.route("/<org_id>/NarrationReport", methods = ["GET", "POST"])
+def narrationReport(org_id):
+    receipts = []
+    if request.method == "POST":
+        narrations = Narration.query.all()
+        if request.form["options"] == "Cash":
+            receipts = [_ for _ in db.session.query(Receipt).filter(and_(Receipt.mode == "Cash", Receipt.org_id == org_id)).all() if _.rid in [__.rid for __ in narrations]]
+        elif request.form["options"] == "Others":
+            receipts = [_ for _ in db.session.query(Receipt).filter(and_(Receipt.mode != "Cash", Receipt.org_id == org_id)).all() if _.rid in [__.rid for __ in narrations]]
+    mapping = {receipts[_]: db.session.query(Narration).filter(Narration.rid == receipts[_].rid).all()[0] for _ in range(len(receipts))}
+    global CURRENT_NARRATION
+    CURRENT_NARRATION = mapping
+    return render_template("narrationReport.html", mapping = mapping, org_id = org_id, )
+
+@app.route("/downlaodCurrentNarrationReport")
+def downlaodCurrentNarrationReport():
+    with open("app_data/NarrationReport.txt", "w") as f:
+        lines = []
+        for i in CURRENT_NARRATION:
+            lines.append(str(i.receipt_no) + "/" + str(i.amount) + "/" + str(i.realization_date) + "/" + str(CURRENT_NARRATION[i].narration) + "/" + str(i.panid))
+        f.writelines(lines)
+    return send_file("app_data/NarrationReport.txt", as_attachment = True)
