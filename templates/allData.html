@@ -40,6 +40,8 @@
               <th scope="col">Amount</th>
               <th scope="col">Mode</th>
               <th scope="col">Realization Date (If 'Bank' payment mode)</th>
+              <th scope="col">Transaction Update</th>
+
   
   
             </tr>
@@ -63,6 +65,7 @@
               <td>{{receipt.amount}}</td>
               <td>{{receipt.mode}}</td>
               <td>{{receipt.realization_date}}</td>
+              <td><a href = "/updateReceipt/{{ receipt.rid }}/"><button type="button" class="btn btn-outline-success">Update</button></a></td>
             </tr>
             {% endfor %}
           </tbody>

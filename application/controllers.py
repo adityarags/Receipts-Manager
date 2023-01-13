@@ -87,6 +87,52 @@ def receipt(org_id):
     return render_template("receipt.html", purposes = purposes, org = current_org)
 
 
+@app.route("/updateReceipt/<int:rid>/", methods = ["GET", "POST"])
+def updateReceipt(rid):
+    currentReceipt = Receipt.query.filter_by(rid = rid).all()[0]
+    org_id = currentReceipt.org_id
+    current_org = Organization.query.filter_by(org_id = org_id).all()[0]
+    purposes = current_org.Purposes.split(",")
+    if request.method == "POST":
+        if request.form["rdate"] != "":
+            currentReceipt.receipt_date = request.form["rdate"]
+        if request.form["bno"] != "":
+            currentReceipt.book_no = request.form["bno"]
+        if request.form["rno"] != "":
+            currentReceipt.receipt_no = request.form["rno"]
+        if request.form["name"] != "":
+            currentReceipt.name = request.form["name"]
+        if request.form["address"] != "":
+            currentReceipt.address = request.form["address"]
+        if request.form["state"] != "":
+            currentReceipt.state = request.form["state"]
+        if request.form["pincode"] != "":
+            currentReceipt.pincode = request.form["pincode"]
+        if request.form["landline"] != "":
+            currentReceipt.landline = request.form["landline"]
+        if request.form["phone"] != "":
+            currentReceipt.phoneno = request.form["phone"]
+        if request.form["email"] != "":
+            currentReceipt.email = request.form["email"]
+        
+        if request.form["id_type"] != "":
+            currentReceipt.id_type = request.form["id_type"]
+
+        if request.form["purposes"] != "":
+            currentReceipt.purpose = request.form["purposes"]
+        
+        if request.form["pan"] != "":
+            currentReceipt.panid = request.form["pan"]
+
+        
+        if request.form["amount"] != "":
+            currentReceipt.amount = request.form["amount"]
+        
+        if request.form["mode"] != "":
+            currentReceipt.mode = request.form["mode"]
+        db.session.commit()
+    return render_template("updateReceipt.html", receipt = currentReceipt, purposes = purposes, org_id = org_id    )
+
 @app.route("/<int:org_id>/addPurpose", methods = ["GET", "POST"])
 def addPurpose(org_id):
 
