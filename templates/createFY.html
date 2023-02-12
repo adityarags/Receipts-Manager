@@ -5,22 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" type="text/css" href = "/static/css/style.css">
-    <title>Donation App</title>
+    <title>Donation App | Create Financial Year</title>
 </head>
 <body>
     <header id ="main-header">
         <div class = "container">
-            <h1>Organizations FY: {{ fy }}</h1>
+            <h1>Create Organization</h1>
         </div>
     </header>
     <nav id = "navbar">
         <div class="container">
             <li><a href ="/">Home</a></li>
-            <li><a href="/createOrganization/{{ fy }}">Create</a></li>
-            <li><a href="/selectOrganization/{{ fy }}">Select</a></li>
-            <li><a href="/modifyOrganization/{{ fy }}">Modify</a></li>
         </div>
     </nav>
+    <div class = "content-block">
+        <form method="POST" >
+            <div class = "form-group">
+                <label for = "fy">Financial Year</label>
+                <input type = "text" id = "fy" name="fy" required>
+            </div>
 
+            <div class = "form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

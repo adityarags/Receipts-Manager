@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from application.config import Config
 from application.database import db
-import webview
+# import webview
 
 app = None
 curr_dir = os.path.abspath(os.path.dirname(__file__))
@@ -19,7 +19,7 @@ app = create_app()
 db.init_app(app)
 
 
-window = webview.create_window("NGO Receipts Mannager", app)
+# window = webview.create_window("NGO Receipts Mannager", app)
 
 
 if __name__ == "__main__":

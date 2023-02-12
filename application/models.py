@@ -3,6 +3,7 @@ from .database import db
 class Organization(db.Model):
     __tablename__ = "organization"
     org_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    FY = db.Column(db.String)
     Name = db.Column(db.String)
     orgcode = db.Column(db.String)
     Address = db.Column(db.String)
@@ -69,4 +70,9 @@ class Narration(db.Model):
     __tablename__ = "narration"
     nid = db.Column(db.Integer, primary_key = True, autoincrement = True)
     rid = db.Column(db.Integer)
-    narration = db.Column(db.String)    
+    narration = db.Column(db.String)
+
+class Financial_Years(db.Model):
+    __tablename__ = "financial_years"
+    fyNum = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    fy = db.Column(db.String)

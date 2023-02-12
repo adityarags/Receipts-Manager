@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, send_file, flash
 from flask import current_app as app
 from .database import db
-from .models import Organization, Receipt, Donator, Maintainer, Book_Maintainers, Narration
+from .models import Organization, Receipt, Donator, Maintainer, Book_Maintainers, Narration, Financial_Years
 from sqlalchemy import func, or_, and_
 import numpy as np
 import pandas as pd
@@ -10,14 +10,38 @@ from fileinput import filename
 DF = None
 CURRENT_NARRATION = None
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+@app.route("/", methods = ["GET", "POST"])
+def topPage():
+    print([_.fy for _ in Financial_Years.query.all()])
+    fys = [_.fy for _ in Financial_Years.query.all()]
+    print(fys)
+    if request.method == "POST":
+        if request.form["fy"] == "createNew":
+            return redirect(url_for("createFY"))
+        else:
+            return redirect(url_for("home", fy = request.form["fy"]))
+    return render_template("topPage.html", fys = fys)
 
-@app.route("/createOrganization", methods = ["GET", "POST"])
-def createOrg():
+@app.route("/home/<fy>")
+def home(fy):
+    return render_template("index.html", fy = fy)
+
+@app.route("/createFY", methods = ["GET", "POST"])
+def createFY():
+    flag = "No"
+    if request.method == "POST":
+        print(request.form["fy"])
+        newFY = Financial_Years(fy = request.form["fy"])
+        db.session.add(newFY)
+        db.session.commit()
+        flag = "yes"
+    return render_template("createFY.html", flag = flag)
+
+
+@app.route("/createOrganization/<fy>", methods = ["GET", "POST"])
+def createOrg(fy):
     if request.method == "GET":
-        return render_template("createOrg.html")
+        return render_template("createOrg.html", fy = fy)
     elif request.method == "POST":
         newOrg = Organization(
             orgcode = request.form["orgcode"],
@@ -31,17 +55,23 @@ def createOrg():
             atgr_no = request.form["atgregno"],
             aa12_no = request.form["12aano"],
             website = request.form["website"],
-            Purposes = ""
+            Purposes = "",
+            FY = fy
         )
         
         db.session.add(newOrg)
         db.session.commit()
        
-        return render_template("createOrg.html")
+        return render_template("createOrg.html", fy = fy)
 
 
-@app.route("/selectOrganization")
-def orgSelect():
+@app.route("/selectOrganization/<fy>")
+def orgSelect(fy):
+    allorganizations = Organization.query.filter_by(FY = fy).all()
+    return render_template("organizationSelect.html", allorganizations = allorganizations)
+
+@app.route("/modifyOrganization/<fy>")
+def orgModify():
     allorganizations = Organization.query.all()
     return render_template("organizationSelect.html", allorganizations = allorganizations)
 
